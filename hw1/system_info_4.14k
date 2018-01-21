@@ -1,0 +1,59 @@
+#################################################
+System Specifications
+#################################################
+User Info
+ravi
+uid=1000(ravi) gid=1000(ravi) groups=1000(ravi),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),113(lpadmin),128(sambashare)
+*************************************************
+OS Info
+Linux ub 4.14.0 #1 SMP Sat Jan 20 22:46:58 MST 2018 x86_64 x86_64 x86_64 GNU/Linux
+*************************************************
+OS Distribution
+Distributor ID:	Ubuntu
+Description:	Ubuntu 16.04.3 LTS
+Release:	16.04
+Codename:	xenial
+*************************************************
+OS Version
+Ubuntu 16.04.3 LTS
+*************************************************
+Kernel Info
+Linux version 4.14.0 (ravi@ub) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)) #1 SMP Sat Jan 20 22:46:58 MST 2018
+*************************************************
+System Architecture:
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                1
+On-line CPU(s) list:   0
+Thread(s) per core:    1
+Core(s) per socket:    1
+Socket(s):             1
+NUMA node(s):          1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 78
+Model name:            Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz
+Stepping:              3
+CPU MHz:               2592.857
+BogoMIPS:              5185.71
+Hypervisor vendor:     KVM
+Virtualization type:   full
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              4096K
+NUMA node0 CPU(s):     0
+Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx rdrand hypervisor lahf_lm abm 3dnowprefetch avx2 rdseed clflushopt
+*************************************************
+Information on File system and Memory:
+Filesystem      Size  Used Avail Use% Mounted on
+udev            2.0G     0  2.0G   0% /dev
+tmpfs           396M  5.9M  390M   2% /run
+/dev/sda1        18G  8.4G  8.4G  50% /
+tmpfs           2.0G  192K  2.0G   1% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           2.0G     0  2.0G   0% /sys/fs/cgroup
+tmpfs           396M   60K  396M   1% /run/user/1000
+*************************************************
+####################  EOF  ######################

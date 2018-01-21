@@ -1,0 +1,51 @@
+#!/bin/bash
+
+echo "#################################################" >../hw1/system_info
+echo "System Specifications" >>../hw1/system_info
+echo "#################################################" >>../hw1/system_info
+
+#User Info
+echo "User Info" >>../hw1/system_info
+id -un >>../hw1/system_info
+id >>../hw1/system_info
+echo "*************************************************" >>../hw1/system_info
+
+#Operating System Info
+echo "OS Info" >>../hw1/system_info
+uname --all >>../hw1/system_info
+echo "*************************************************" >>../hw1/system_info
+
+#OS Distribution
+echo "OS Distribution" >>../hw1/system_info
+lsb_release -a >>../hw1/system_info
+echo "*************************************************" >>../hw1/system_info
+
+
+#OS Version
+echo "OS Version" >>../hw1/system_info
+cat /etc/issue.net >>../hw1/system_info
+echo "*************************************************" >>../hw1/system_info
+
+
+#Kernel Version
+#User WHo built kernel and location
+#Version of GCC compiler
+#Type of Kernel
+#Kernel Build Time
+echo "Kernel Info" >>../hw1/system_info
+cat /proc/version >>../hw1/system_info
+echo "*************************************************" >>../hw1/system_info
+
+	
+#System Architecture Info
+echo "System Architecture:" >>../hw1/system_info
+lscpu >>../hw1/system_info
+echo "*************************************************" >>../hw1/system_info
+
+#Information on File System Memory
+echo "Information on File system and Memory:" >>../hw1/system_info
+df -h >>../hw1/system_info
+echo "*************************************************" >>../hw1/system_info
+
+echo "####################  EOF  ######################" >>../hw1/system_info
+
