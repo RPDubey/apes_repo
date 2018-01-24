@@ -6,20 +6,19 @@ LOGPATH=${MYPATH%%bin}/logs
 BUILDPATH=~/git_kernel/linux
 
 echo "Building Kernel" > $LOGPATH/kernel_build.log
-echo "***********************************">$LOGPATH/kernel_build.log
+echo "***********************************">>$LOGPATH/kernel_build.log
 
 
-cp /boot/config-$(uname-r) $BUILDPATH/.config
+sudo cp /boot/config-$(uname -r) $BUILDPATH/.config >>$LOGPATH/kernel_build.log
 
-make defconfig
+sudo make >>$LOGPATH/kernel_build.log
 
-make modules_install
+sudo make modules_install >>$LOGPATH/kernel_build.log
 
-make install
+sudo make install >>$LOGPATH/kernel_build.log
 
 
-echo "Building Kernel Complete" > $LOGPATH/kernel_build.log
-echo "***********************************">$LOGPATH/kernel_build.log
+echo "*************** EOF ***************">>$LOGPATH/kernel_build.log
 
 
 
