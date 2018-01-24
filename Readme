@@ -1,1 +1,5 @@
 This is a repository for ECEN 5013 Advanced Practical Embedded Software.
+
+HW1:
+Scripts for problems 6 & 8 are in "bin" folder
+Logs created by the scripts gets saved in the logs folder 
