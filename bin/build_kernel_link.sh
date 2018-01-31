@@ -1,1 +1,0 @@
-/home/ravi/linux-4.15/build_kernel.sh
