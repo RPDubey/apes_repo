@@ -9,30 +9,33 @@ structures for dlink_list.h
 @Author:Ravi Dubey
 @Date:1/30/2018
 ********************************************************************************/
-#include <stdint.h>
 
 #ifndef DLINK_LIST_H
 #define DLINK_LIST_H
 
-#define type node_info
-#define member node_head
-
-#define OFFSET(type,member) ( (size_t)(&(*type)0->member) )
-
-#define GET_LIST_CONTAINER(addr,type,member) \
-	( (type*)( (char*)(addr) - OFFSET(type,member) )  )
+#include <stdint.h>
+#include <stdlib.h>
+#include <stddef.h>
 
 
+
+/*
+*@brief:structure to hold link list nodes
+*This structure holds the pointer to the previous and next nodes. It dosent hold 
+data or pointer to data.
+*/
 typedef struct node_head{
-
-	struct node* prev;
-	struct node* next;
+	struct node_head* prev;
+	struct node_head* next;
 }node_head;
 
-typedef struct node_info{
-
+/*
+*@brief:structure to hold node info
+*This structure is where the data is stored
+*/
+typedef struct {
 	uint32_t data;
-	struct node_head;
+	struct node_head this_node_head;
 }node_info;
 
 /*
@@ -51,7 +54,7 @@ node_head* destroy(node_head*);
 *@param: the head node pointer and the data to add
 *@return:Pointer to the head of the linked 
 */
-node_head* insert_at_begining(node_head*, );
+node_head* insert_at_begining(node_head*,uint32_t);
 
 
 /*
@@ -104,7 +107,7 @@ Return the data from the linked list item at a given position
 @param:A base node pointer and the index to where to get data from
 @return:The data of the item pointer you 
 */
-peek_value();
+//peek_value();
 
 
 /*

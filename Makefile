@@ -5,6 +5,8 @@
 #@Date:1/30/2018
 #********************************************************************************
 
-hw2.elf:hw2.c
-	gcc -o hw2.elf hw2.c
+hw2.elf:hw2.c dlink_list.o
+	gcc -Werror -o hw2.elf hw2.c dlink_list.o
 
+dlink_list.o:./DataStructure/dlink_list.c ./DataStructure/dlink_list.h
+	gcc -Werror -c -o $@ $< 
