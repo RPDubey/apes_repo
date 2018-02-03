@@ -60,19 +60,111 @@ if (node_info_inst1 == NULL) {
 printf("node instatntiation failed\n");
 return 0;}
 
-insert_at_position(&node_info_inst1->this_node_head,10,0);
-insert_at_position(&node_info_inst1->this_node_head,20,1);
-printf("node_info1_data:%d\n",node_info_inst1->data);
-printf("node_info1_head-next:%p\n",&node_info_inst1->this_node_head.next);
-insert_at_position(&node_info_inst1->this_node_head,30,1);
+node_head* return_head;
+return_head = insert_at_position(&node_info_inst1->this_node_head,10,0);
+printf("Head returned:%p\n",return_head);
+printf("size:%ld\n",size(return_head) );
+
+return_head = insert_at_position(&node_info_inst1->this_node_head,10,-1);
+printf("Head returned:%p\n",return_head);
+printf("size:%ld\n",size(return_head) );
+
+return_head = insert_at_position(&node_info_inst1->this_node_head,10,-2);
+printf("Head returned:%p\n",return_head);
+printf("size:%ld\n",size(return_head) );
+
+
+
+return_head = insert_at_position(&node_info_inst1->this_node_head,10,-3);
+printf("Head returned:%p\n",return_head);
+printf("size:%ld\n",size(return_head) );
+
+return_head = insert_at_position(&node_info_inst1->this_node_head,10,-4);
+printf("Head returned:%p\n",return_head);
+printf("size:%ld\n",size(return_head) );
+
+
+/*
+
+//printf("size:%ld\n",size(&node_info_inst1->this_node_head) );
+return_head = insert_at_position(&node_info_inst1->this_node_head,10,0);
+printf("Head returned:%p\n",return_head);
+
+//printf("size:%ld\n",size(return_head ));
+return_head = insert_at_position(&node_info_inst1->this_node_head,20,-1);
+printf("Head returned:%p\n",return_head);
+
+
+return_head = insert_at_position(&node_info_inst1->this_node_head,20,1);
+printf("Head returned:%p\n",return_head);
+
+return_head = insert_at_position(&node_info_inst1->this_node_head,20,2);
+printf("Head returned:%p\n",return_head);
+
+return_head = insert_at_position(&node_info_inst1->this_node_head,20,-2);
+printf("Head returned:%p\n",return_head);
+
+return_head = insert_at_position(&node_info_inst1->this_node_head,20,-1);
+printf("Head returned:%p\n",return_head);
+
+return_head = insert_at_position(&node_info_inst1->this_node_head,20,-1);
+printf("Head returned:%p\n",return_head);
+
+//return_head = insert_at_position(return_head,20,1);
+//printf("size:%ld\n",size(return_head ));
+//return_head = insert_at_position(&node_info_inst1->this_node_head,20,1);
+
+
+printf("%p\n",&node_info_inst1->this_node_head);
+//printf("%p\n",(&node_info_inst1->this_node_head)->prev);
+printf("%p\n",return_head);
+printf("%p\n",return_head->next);
+printf("%p\n",return_head->next->next);
+printf("%p\n",return_head->next->next->next);
+//printf("%p\n",return_head->next->next->next->next);
+*/
+
+
+
+//printf("size:%ld\n",size( return_head ) );
+//printf("size:%ld\n",size( &node_info_inst1->this_node_head ) );
+//printf("size:%ld\n",size( (&node_info_inst1->this_node_head)->prev ) );
+/*
+insert_at_end(&node_info_inst1->this_node_head,30);
+
+printf("size:%ld\n",size( &(node_info_inst1->this_node_head) ) );
+
+insert_at_end(&node_info_inst1->this_node_head,30);
+
+printf("size:%ld\n",size( &(node_info_inst1->this_node_head) ) );
+
+insert_at_end(&node_info_inst1->this_node_head,30);
+
+printf("size:%ld\n",size( &(node_info_inst1->this_node_head) ) );
+printf("size:%ld\n",size( node_info_inst1->this_node_head.next ) );
+printf("size:%ld\n",size( node_info_inst1->this_node_head.next->next ) );
+printf("size:%ld\n",size( node_info_inst1->this_node_head.next->next->next ) );
+printf("size:%ld\n",size( node_info_inst1->this_node_head.next->next->next->next ) );*/
+
+//printf("node_info1_data:%d\n",node_info_inst1->data);
+/*
+//printf("node_info1_head-next:%p\n",&node_info_inst1->this_node_head.next);
+insert_at_position(&node_info_inst1->this_node_head,30,-1);
+insert_at_position(&node_info_inst1->this_node_head,40,2);
+insert_at_position(&node_info_inst1->this_node_head,50,-2);
+insert_at_position(&node_info_inst1->this_node_head,60,2);
+insert_at_position(&node_info_inst1->this_node_head,70,2);
 
 printf("size:%ld\n",size(&node_info_inst1->this_node_head) );
-node_head* return_head = delete_from_end(&node_info_inst1->this_node_head);
-return_head = delete_from_end(return_head);
-printf("size:%ld\n",size(&node_info_inst1->this_node_head) );
-delete_from_end(return_head);
-printf("size:%ld\n",size(&node_info_inst1->this_node_head) );
+//node_head* return_head = delete_from_end(&node_info_inst1->this_node_head);
+
+//return_head = delete_from_end(return_head);
+//printf("size:%ld\n",size((&node_info_inst1->this_node_head)->next) );
+//delete_from_end(return_head);
+//printf("size:%ld\n",size((&node_info_inst1->this_node_head)->next->next) );
 //free(node_info_inst1);
+//printf("size:%ld\n",size((&node_info_inst1->this_node_head)->next->next) );
+*/
 return ret;
 
 }

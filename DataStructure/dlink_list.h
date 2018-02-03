@@ -68,6 +68,41 @@ node_head* insert_at_end(node_head*, uint32_t );
 
 
 /*
+*@brief:returns head of dll
+*returns the head of a dll
+*@param: a node pointer in the linked list
+*@return: Pointer to the head of the linked
+*/
+node_head* return_head(node_head*);
+
+/*
+*@brief:returns distance from head
+*calculates the distance of a node fromm head
+*@param: a node pointer in the linked list
+*@return: distance from head
+*/
+size_t distance_head(node_head*);
+
+/*
+*@brief:returns distance from tail
+*calculates the distance of a node fromm tail
+*@param: a node pointer in the linked list
+*@return: distace from tail
+*/
+size_t distance_tail(node_head*);
+
+
+/*
+*@brief:Implements adding node between two given nodes
+*Add a node tbetween the two given nodes of the linked list
+*@param: two node pointers and the data to add
+*@return: Pointer to the head of the linked
+*/
+node_head* insert_between(node_head*,node_head*, uint32_t );
+
+
+
+/*
 *@brief:Implements adding node at a given position in dll
 *Add a node  at 'index' nodes away from the base node pointer. positive index
 moves towards tail, while negative index moves towards head. eg if index passed
@@ -78,7 +113,7 @@ in the requisite direction, then no node is added and NULL pointer is returned.
 *@param:a base node pointer, data to add, and the index of where to add the data
 *@return:Pointer to the head of the linked
 */
-node_head* insert_at_position(node_head*,uint32_t,size_t);
+node_head* insert_at_position(node_head*,uint32_t,int);
 
 
 /*
@@ -103,7 +138,7 @@ node_head* delete_from_end(node_head*);
 *@param:a base node pointer and the index of where to add the data
 *@return:Pointer to the head of the linked list
 */
-node_head* delete_from_position(node_head*,size_t);
+node_head* delete_from_position(node_head*,int);
 
 /*
 @brief:

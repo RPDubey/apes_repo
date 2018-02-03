@@ -37,13 +37,22 @@ this_node_info->data = node_data;
 }
 //if head exists, create a new node
 else{
+
 node_info* new_node = (node_info*)malloc(sizeof(node_info));
 if(new_node == NULL) return NULL;
+
 new_node->this_node_head.prev = NULL ;// this node is now the head
 new_node->this_node_head.next = head;
 head->prev = &(new_node->this_node_head);
 new_node->data = node_data;
+head = &new_node->this_node_head;//new head for list
+
+//case when added node is second element
+if(head->next->next == head->next) {
+  head->next->next = NULL;}
+
 }
+
 return head;
 }
 /********************************************************************************/
@@ -54,7 +63,7 @@ if(head == NULL) return NULL;
 
 //if no head exists
 else if(head->next == NULL){
-  printf("No head\n");
+
 head->next = head;//next pointer of the "Head" node_head points to itself
 head->prev = NULL;
 node_info* this_node_info = GET_LIST_CONTAINER(head,node_info,this_node_head);
@@ -63,7 +72,7 @@ this_node_info->data = node_data;
 
 //if head exists, create a new node
 else{
-    printf("head Exists\n");
+
 node_info* new_node = (node_info*)malloc(sizeof(node_info));
 if(new_node == NULL) return NULL;
 node_head* list_head = head;//saving the head in another variable
@@ -81,127 +90,156 @@ head = list_head;
 return head;
 
 }
+/*******************************************************************************/
+node_head* return_head(node_head* node){
 
-/********************************************************************************/
-node_head* insert_at_position(node_head* base_node_head,uint32_t node_data,size_t index){
-  //null head
-  if(base_node_head == NULL) return NULL;
+if(node == NULL) return NULL;
+if( (node->next == NULL) && (node->prev == NULL) ) return NULL;
 
-  node_head* list_head;
+size_t list_length = size(node);
 
-  //if no head exists, then the passed base pointer will be made the list Head if
-  //index is o. If index is not 0 for no head case, then return null
- if(base_node_head->next == NULL){
-  if(index != 0) return NULL;
-  list_head = base_node_head;
-  base_node_head->next = base_node_head;
-  base_node_head->prev = NULL;
-  node_info* this_node_info = GET_LIST_CONTAINER(base_node_head,
-                                                  node_info,this_node_head);
-  this_node_info->data = node_data;
+if(list_length == 1) return node;
 
+if(list_length == 2){
+
+  if( (node->prev == NULL) &&(node->next != NULL) ) return node;
+  if( (node->next == NULL) &&(node->prev != NULL) ) return node->prev;
+  return NULL;
   }
-//in case only one node exists
-  else if(base_node_head->next == base_node_head){
-  if(index == 1) {
-    list_head = base_node_head;
-    node_info* new_node = (node_info*)malloc(sizeof(node_info));
-    if(new_node == NULL) return NULL;
-    new_node->this_node_head.prev = base_node_head ;// this node is now the head
-    new_node->this_node_head.next = NULL;
-    base_node_head->next = &new_node->this_node_head;
-    base_node_head->prev = NULL;
-    new_node->data = node_data;
-  }
-  else if(index==-1){
-    node_info* new_node = (node_info*)malloc(sizeof(node_info));
-    if(new_node == NULL) return NULL;
-    list_head = &new_node->this_node_head;
-    new_node->this_node_head.prev = NULL ;// this node is now the head
-    new_node->this_node_head.next = base_node_head;
-    base_node_head->next =NULL;
-    base_node_head->prev = &new_node->this_node_head;
-    new_node->data = node_data;
-  }
-  else{
-    return NULL;
-  }
+if(list_length >  2){
+  while(node->prev != NULL) node = node->prev;
+  return node;
+}
+else return NULL;
+}
+/*******************************************************************************/
+node_head* insert_between(node_head* node1,node_head* node2, uint32_t node_data){
 
-  }
+if(node1 == NULL || node2 == NULL) return NULL;
+node_info* new_node = (node_info*)malloc(sizeof(node_info));
+if(new_node == NULL) return NULL;
 
+node1->next = &new_node->this_node_head;
+node2->prev = &new_node->this_node_head;
 
-  //in case more than one node exists
-  else{
+(new_node->this_node_head).prev = node1;
+(new_node->this_node_head).next = node2;
+new_node->data = node_data;
 
-    node_head* base_node_head_copy = base_node_head;
-    base_node_head = base_node_head_copy;
+return return_head(node1);
 
-    //locate and save the head pointer, and no. of nodes on the required side.
-    while( (base_node_head->prev != NULL) ){ base_node_head = base_node_head->next;}
-    list_head = base_node_head;
+}
 
-int i;
-if(index == 0) { return NULL;}
-else if(index>0){
-  for(i=0;i<index;i++){
-    base_node_head=base_node_head->next;
-    if(base_node_head->next == NULL) break;
+/*******************************************************************************/
+size_t distance_head(node_head* node){
+  if(node == NULL) return -1;
+  if( (node->next == NULL) && (node->prev == NULL) ) return -1;
+  if( (node->next == node) && (node->prev == NULL) ) return  0;
+  if( (node->prev == NULL) ) {
+    if(node->next->next == NULL) return 0;
   }
 
-  if( (base_node_head->next == NULL) && (i == index -1) ) {
-    node_info* new_node = (node_info*)malloc(sizeof(node_info));
-    if(new_node == NULL) return NULL;
-    base_node_head->next = &(new_node->this_node_head);
-    (new_node->this_node_head).next = NULL;
-    (new_node->this_node_head).prev = base_node_head;
-    new_node->data = node_data;
-
+  if( (node->next == NULL) ) {
+    if(node->prev->prev == NULL) return 1;
   }
-//  index is gretaer than length of dll from base node to tail
-  else if( (base_node_head->next == NULL) && (i < index -1) ) {return NULL;}
 
-  else if(base_node_head->next != NULL){
-    node_info* new_node = (node_info*)malloc(sizeof(node_info));
-    if(new_node == NULL) return NULL;
-    (new_node->this_node_head).next = base_node_head->next;
-    base_node_head->next->prev = &new_node->this_node_head;
-    base_node_head->next = &(new_node->this_node_head);
-    (new_node->this_node_head).prev = base_node_head;
-    new_node->data = node_data;
+size_t i = 0;
+
+  while(node->prev != NULL){
+    i++;
+    node=node->prev;
+  }
+return i;
+}
+
+/*******************************************************************************/
+size_t distance_tail(node_head* node){
+  if(node == NULL) return -1;
+  if( (node->next == NULL) && (node->prev == NULL) ) return -1;
+  if( (node->next == node) && (node->prev == NULL) ) return  0;
+  if( (node->prev == NULL) ) {
+    if(node->next->next == NULL) return 1;
+  }
+
+  if( (node->next == NULL) ) {
+    if(node->prev->prev == NULL) return 0;
+  }
+
+size_t i = 0;
+
+  while(node->next != NULL){
+    i++;
+    node=node->next;
+  }
+return i;
+}
+
+
+
+/*******************************************************************************/
+node_head* insert_at_position(node_head* base_node_head,\
+                              uint32_t node_data,\
+                              int index){
+
+if(base_node_head == NULL) return NULL;
+
+//if no head exists, then the passed base pointer will be made the list Head if
+//index is o. If index is not 0 for no head case, then return null
+if( (base_node_head->next == NULL) && (base_node_head->prev == NULL) ){
+if(index != 0) return NULL;
+return insert_at_begining(base_node_head, node_data);
+}
+
+size_t list_length = size(base_node_head);
+
+if(list_length == 1){
+if(index == 1) return insert_at_end(base_node_head,node_data);
+if(index == -1) return insert_at_begining(base_node_head,node_data);
+return NULL;
+}
+
+if(list_length == 2){
+if( (base_node_head->prev == NULL) && (base_node_head->next != NULL) ){
+  if(index == -1) return insert_at_begining(base_node_head,node_data);
+  if(index ==  1) return insert_between(base_node_head,base_node_head->next,node_data);
+  if(index ==  2) return insert_at_end(base_node_head,node_data);
+  return NULL;
+}
+else if( (base_node_head->next == NULL) && (base_node_head->prev != NULL) ){
+
+
+  if(index == -1) return insert_between(base_node_head->prev,base_node_head,node_data);
+  if(index ==  1) return insert_at_end(base_node_head->prev,node_data);
+  if(index == -2) return insert_at_begining(base_node_head->prev,node_data);
+  else return NULL;
+}
+else return NULL;
+}
+
+if(list_length > 2){
+  if(index == 0) return NULL;
+  if(index > 0){
+    size_t tail_length = distance_tail(base_node_head);
+    if( (index > tail_length+1) || (tail_length < 0) ) return NULL;
+    if( index == tail_length + 1 ) return insert_at_end(return_head(base_node_head),node_data);
+    for(int i = 0; i< index-1;i++) base_node_head = base_node_head->next;
+    return insert_between(base_node_head,base_node_head->next,node_data);
+  }
+  if(index < 0){
+    index *= -1;
+    size_t head_length = distance_head(base_node_head);
+    if( (index > head_length+1) || (head_length < 0) ) return NULL;
+    if( index == head_length + 1 ) return insert_at_begining(return_head(base_node_head),node_data);
+
+    for(int i = 0; i< index-1;i++) {base_node_head = base_node_head->prev;}
+
+    return insert_between(base_node_head,base_node_head->prev,node_data);
 
 
   }
 }
-else if(index <0){
-  index = index * -1;
-  for(i=0;i<index;i++){
-    base_node_head=base_node_head->prev;
-    if(base_node_head->prev == NULL) break;
-  }
 
-  if( (base_node_head->prev == NULL) && (i == index -1) ) {
-    node_info* new_node = (node_info*)malloc(sizeof(node_info));
-    if(new_node == NULL) return NULL;
-    base_node_head->prev = &(new_node->this_node_head);
-    (new_node->this_node_head).next = base_node_head;
-    (new_node->this_node_head).prev = NULL;
-    new_node->data = node_data;
-  }
-  else if( (base_node_head->prev == NULL) && (i < index -1) ) {return NULL;}
-  else if(base_node_head->prev != NULL){
-    node_info* new_node = (node_info*)malloc(sizeof(node_info));
-    if(new_node == NULL) return NULL;
-    (new_node->this_node_head).prev = base_node_head->prev;
-    base_node_head->prev->next = &new_node->this_node_head;
-    base_node_head->prev = &(new_node->this_node_head);
-    (new_node->this_node_head).next = base_node_head;
-    new_node->data = node_data;
-  }
-}
-
-  }
-
-  return list_head;
+return NULL;
 
 }
 
@@ -274,7 +312,7 @@ node_head* delete_from_end(node_head* head){
 }
 
 /********************************************************************************/
-node_head* delete_from_position(node_head* base_node_head,size_t index){
+node_head* delete_from_position(node_head* base_node_head,int index){
   //null head
   if(base_node_head == NULL) return NULL;
 
@@ -357,22 +395,36 @@ free(GET_LIST_CONTAINER(base_node_head,node_info,this_node_head));
 
 
 /*******************************************************************************/
-size_t size(node_head* head){
-  if(head == NULL) return 0;
-  if(head->next == head) return 1;
+size_t size(node_head* node){
 
-  size_t i =1;
-  node_head* head_copy = head;
+  if(node == NULL) return -1;
 
-  while(head->next != NULL){
-    i++;
-    head=head->next;
+  if( (node->next == NULL) && (node->prev == NULL) ) return 0;
+
+  if( node->next == node ) {return 1;}
+
+  if( (node->prev == NULL) ) {
+    if(node->next->next == NULL) return 2;
   }
-  head = head_copy;
-  while(head->prev != NULL){
-    i++;
-    head=head->prev;
+
+  if( (node->next == NULL) ) {
+    if(node->prev->prev == NULL) return 2;
   }
-return i;
+
+  size_t i = 0;
+
+  node_head* node_copy = node;
+
+  while(node->next != NULL){
+    i++;if(i>6) break;
+    node=node->next;printf("at:%p\n",node);
+  }
+//printf("Mrk1\n" );
+  node = node_copy;
+  while(node->prev != NULL){
+    i++;
+    node=node->prev;
+  }
+return i+1 ;
 
 }
