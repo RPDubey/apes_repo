@@ -146,7 +146,7 @@ Return the data from the linked list item at a given position
 @param:A base node pointer and the index to where to get data from
 @return:The data at index nodes away from the given base node
 */
-uint32_t peek_value();
+//uint32_t peek_value();
 
 
 /*
