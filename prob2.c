@@ -40,10 +40,10 @@ char* in_string = (char*)malloc(length);
 
 //Read and input string from the command line and write to the string
 printf("Enter String:");
-scanf("%s",in_string);
+gets(in_string);
 
 //Write the string to the file
-fprintf(fp,"%s",in_string);
+fputs(in_string,fp);
 
 //Flush file output
 fflush(fp);
