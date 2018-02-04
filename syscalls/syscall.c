@@ -17,27 +17,31 @@ entry/syscalls
 
 int compare(const void* lhs, const void* rhs){
 
-if ( *(const char*)lhs >  *(const char*)rhs )  return 1;
-if ( *(const char*)lhs <  *(const char*)rhs ) return -1;
-if ( *(const char*)lhs == *(const char*)rhs )  return 0;
+if ( *(const int32_t*)lhs >  *(const int32_t*)rhs )  return -1;
+if ( *(const int32_t*)lhs <  *(const int32_t*)rhs ) return 1;
+if ( *(const int32_t*)lhs == *(const int32_t*)rhs )  return 0;
 }
 
 
-SYSCALL_DEFINE3(mysyscall,char *,inbuf,size_t,len,char*,outbuf){
+SYSCALL_DEFINE3(mysyscall,int32_t *,inbuf,size_t,len,int32_t*,outbuf){
 
 	printk(KERN_INFO "Entering mysyscall\n");
-	char* buf = (char*) kmalloc(len,GFP_USER);
+	printk(KERN_INFO "Buffer Size is:%ld bytes\n",len*sizeof(int32_t) );
+	if(inbuf == NULL || outbuf == NULL || len < 1) return -EFAULT;
+	
+	int32_t* buf = (int32_t*) kmalloc(len*sizeof(int32_t),GFP_USER);
 	if(buf == NULL) return -EFAULT;
 	printk(KERN_INFO "Buffer Created\n");
-	long copied = copy_from_user(buf,inbuf,len);
+	long copied = copy_from_user(buf,inbuf,len*sizeof(int32_t));
 	if(copied < 0) return -EFAULT;	
 	printk(KERN_INFO "Copy to kernel space from userspace succesful\n");
 	
-	sort(buf,len,sizeof(char),&compare,NULL);
-	printk(KERN_INFO "Sorting of characters done\n");
+	printk(KERN_INFO "Starting Sort\n");
+	sort(buf,len,sizeof(int32_t),&compare,NULL);
+	printk(KERN_INFO "Sorting done\n");
 	
 
-	copied = copy_to_user(outbuf,buf,len) ;
+	copied = copy_to_user(outbuf,buf,len*sizeof(int32_t)) ;
 	if(copied < 0) return -EFAULT;	
 	printk(KERN_INFO "Copy from kernel space to userspace succesful\n");
 	
@@ -46,9 +50,9 @@ SYSCALL_DEFINE3(mysyscall,char *,inbuf,size_t,len,char*,outbuf){
 }
 
 
-
+/*Not used for this problem*/
 SYSCALL_DEFINE0(mysyscall1){
-
+	
 	printk(KERN_INFO "Entering mysyscall1\n");
 	return 0;
 	}
