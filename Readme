@@ -7,6 +7,8 @@ problem4: prob4.sh is the script invoked by cron job. this in turn invokes prob4
 prob5: Kernel modules folder has relevant files
 prob6: DataStructure folder has relevant files
 prob7:cmocka_test folder has unit test files
+to build the unit tests use make and ./dlink_list.elf to run the binary 
+
 
 hw2.c implements running of the Double link list functions
 
