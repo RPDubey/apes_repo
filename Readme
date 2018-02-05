@@ -1,5 +1,18 @@
 This is a repository for ECEN 5013 Advanced Practical Embedded Software.
 
+HW2:
+problem2: prob2.c is the file implementing prob2 and prob2. log is the file created
+problem3: syscalls folder has syscall.c implementing the syscall and links to table and .h files
+problem4: prob4.sh is the script invoked by cron job. this in turn invokes prob4 binary. The output is in prob4.log
+prob5: Kernel modules folder has relevant files
+prob6: DataStructure folder has relevant files
+prob7:cmocka_test folder has unit test files
+
+hw2.c implements running of the Double link list functions
+
+11235
+
+
 HW1:
 Scripts for problems 6 & 8 are in "bin" folder
 Logs created by the scripts gets saved in the logs folder 
