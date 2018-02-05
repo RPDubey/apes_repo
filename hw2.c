@@ -56,7 +56,7 @@ printf("size:%ld\n",size(return_head) );
 
 return_head = destroy(return_head->next->next);
 printf("Head returned:%p\n",return_head);
-printf("size:%ld\n",size((return_head) );
+printf("size:%ld\n",size((return_head) ));
 
 return ret;
 
